@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -24,6 +25,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import model.HallBooking;
+import model.Hotel;
 import model.StaffMember;
 
 /**
@@ -1188,22 +1191,30 @@ public class manager_view extends javax.swing.JFrame {
         TableModel model = jTable3.getModel();
 
         int booking_ID = (Integer)model.getValueAt(jTable3.getSelectedRow(), 0) ;
-        String name = (String) model.getValueAt(jTable3.getSelectedRow(), 1);
+//        
+//        String name = (String) model.getValueAt(jTable3.getSelectedRow(), 1);
+//        Date date1 = (Date) model.getValueAt(jTable3.getSelectedRow(), 2);
+//        DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
+//        String date = df1.format(date1);
+//        String noOfPeople = Integer.toString((Integer)model.getValueAt(jTable3.getSelectedRow(), 3)) ;
+//        String contactNumber = (String) model.getValueAt(jTable3.getSelectedRow(), 4);
+//        String address = (String) model.getValueAt(jTable3.getSelectedRow(), 5);
+//        String pack = (String) model.getValueAt(jTable3.getSelectedRow(), 6);
 
-        Date date1 = (Date) model.getValueAt(jTable3.getSelectedRow(), 2);
-        DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
-        String date = df1.format(date1);
-        String noOfPeople = Integer.toString((Integer)model.getValueAt(jTable3.getSelectedRow(), 3)) ;
-        String contactNumber = (String) model.getValueAt(jTable3.getSelectedRow(), 4);
-        String address = (String) model.getValueAt(jTable3.getSelectedRow(), 5);
-        String pack = (String) model.getValueAt(jTable3.getSelectedRow(), 6);
-
-        //ArrayList<HallBooking> hallArray = Hotel.getInstance().getHallbooking();
-
-        HallBooking_View hbv= new HallBooking_View(booking_ID,name,date,noOfPeople,contactNumber,address,pack );
-        jDesktopPane5.add(hbv);
-        hbv.setLocation(300, 5);
-        hbv.show();        // TODO add your handling code here:
+        ArrayList<HallBooking> hallArray = db.getAllHallBookings();
+        
+        Iterator iterator = hallArray.iterator();
+        while (iterator.hasNext()) {
+            HallBooking h = (HallBooking)iterator.next();
+            if (h.getBookingIndex()== booking_ID){
+            HallBooking_View hbv= new HallBooking_View(h );
+             jDesktopPane5.add(hbv);
+             hbv.setLocation(300, 5);
+             hbv.show();        // TODO add your handling code here:
+            break;
+            }
+        }
+               // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
