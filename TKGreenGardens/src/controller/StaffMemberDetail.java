@@ -5,7 +5,6 @@
  */
 package controller;
 
-import database.Details;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import model.StaffMember;
@@ -14,14 +13,14 @@ import model.StaffMember;
  *
  * @author Nethmi
  */
-public class SalaryDetails extends AbstractTableModel{
-    
+public class StaffMemberDetail extends AbstractTableModel {
     private static final String[] COLUMN_NAMES ={"Staff ID","Name","Designation"};
-    private static ArrayList<Details> list;
+    private static ArrayList<StaffMember> list;
     
-    public SalaryDetails(ArrayList<Details> s){
+    public StaffMemberDetail(ArrayList<StaffMember> s){
         list=s;
     }
+    
     @Override
     public int getRowCount() {
          return list.size();
@@ -39,14 +38,13 @@ public class SalaryDetails extends AbstractTableModel{
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch(columnIndex){
             case 0 :
-                return list.get(rowIndex).getDate();
+                return list.get(rowIndex).getEmployeeID();
             case 1 :
-                return list.get(rowIndex).getPurpose();    
+                return list.get(rowIndex).getName();    
             case 2 :
-                return list.get(rowIndex).getAmount();
+                return list.get(rowIndex).getDesignation();
             default :
                 return "Error";
         }
     }
-    
 }

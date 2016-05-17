@@ -5,6 +5,7 @@
  */
 package database;
 
+import controller.Details;
 import model.*;
 import java.sql.Connection;
 import java.sql.Date;
@@ -119,26 +120,26 @@ public class DBOperations {  ////////update staff liyanndooooooooooooooooooooooo
     }
 
     //add bookings into hall_booking table in DB
-    public void addHallBooking(HallBooking b) {
+    public boolean addHallBooking(HallBooking b) {
         try {
             con = (Connection) DriverManager.getConnection(url, username, password);  //get the connection to the database
-            String query = "INSERT INTO hall_booking VALUES(?,?,?,?)";
+            String query = "INSERT INTO hall_booking VALUES(?,?,?,?,?,?,?)";
             pst = con.prepareStatement(query);
 
             //add values to the sql query
             pst.setInt(1, 0);
-            pst.setString(2, b.getCustomer().getCustomerID());
-            pst.setDate(3, (Date) b.getDate());
-            pst.setString(4, b.getCustomer().getName());
-            pst.setString(5, b.getCustomer().getAddress());
-            pst.setString(6, b.getCustomer().getNIC());
-            pst.setString(7, b.getCustomer().getContactNumber());
+            pst.setString(2, b.getCustomer().getName());
+            pst.setDate(3, new java.sql.Date(b.getDate().getTime())); // util to sql
+            pst.setInt(4, b.getNoOfPeople());
+            pst.setString(5, b.getCustomer().getContactNumber());
+            pst.setString(6, b.getCustomer().getAddress());
+            pst.setString(7, b.getPack());
 
             pst.executeUpdate(); //execute the sql query and insert the values to the database
-
+            return true;
         } catch (Exception e) {
             System.out.print(e);
-
+            return false;
             //close all the resources
         } finally {
             try {
@@ -151,6 +152,46 @@ public class DBOperations {  ////////update staff liyanndooooooooooooooooooooooo
             } catch (Exception e) {
             }
         }
+    }
+    
+    
+    public int checkHallAvailability(Date date) {
+        try {
+            con = (Connection) DriverManager.getConnection(url, username, password);  //get the connection to the database
+            String query = "SELECT Date FROM hall_booking";
+            pst = (PreparedStatement) con.prepareStatement(query);
+
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                System.out.println(rs.getDate(1));
+//                
+//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//                Date parsed = (Date) format.parse(rs.getString(1));
+//                java.sql.Date sql = new java.sql.Date(parsed.getTime());
+
+                if (date.equals(rs.getDate(1))) {
+                    return 0; // date already been booked!
+                }
+            }
+            return 1; //date is available
+        } catch (Exception e) {
+            System.out.println(e);
+            return 2; //error while searching
+
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
     }
 
     //add staff members into staff_members table in DB

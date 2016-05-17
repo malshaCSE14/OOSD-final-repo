@@ -5,8 +5,9 @@
  */
 package view;
 
+import controller.SalaryDetailsCon;
 import database.DBOperations;
-import database.Details;
+import controller.Details;
 import java.util.ArrayList;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
@@ -93,22 +94,6 @@ public class SalaryDetails extends javax.swing.JInternalFrame {
         });
 
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Date", "Purpose", "Payment"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
         jTable1.setRowSelectionAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
@@ -222,24 +207,8 @@ public class SalaryDetails extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        /*  DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-         dtm.getDataVector().removeAllElements();
-
-         //String tempMonth = jComboBox1.getSelectedItem().toString();
-         //DateFormat df = new SimpleDateFormat("MM");
-         //Date month;
-         //try {
-         // month = df.parse(tempMonth);
-         String month = jComboBox1.getSelectedItem().toString();
-         ArrayList<Details> details = db.showSalaryDetails(month, Integer.parseInt(jTextField1.getText()));
-
-         for (Details array : details) {
-         dtm.addRow(new Object[]{array.getDate(), array.getPurpose(), array.getAmount()});
-         }
-         //} catch (ParseException ex) {
-         //    System.out.println(ex);;
-         // } */
-
+       
+        loadSalaryDetails();
 
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
@@ -262,8 +231,9 @@ public class SalaryDetails extends javax.swing.JInternalFrame {
     private void loadSalaryDetails() {
         String month = jComboBox1.getSelectedItem().toString();
         list = db.showSalaryDetails(month, Integer.parseInt(jTextField1.getText()));
-        SalaryDetails s = new SalaryDetails(list);
-        tblStudents.setModel(s);
+        SalaryDetailsCon s = new SalaryDetailsCon(list);
+        jTable1.setModel(s);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
