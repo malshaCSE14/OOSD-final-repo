@@ -5,30 +5,19 @@
  */
 package view;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import model.HallBooking;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Nethmi
+ * @author user
  */
-public class HallBooking_View extends javax.swing.JInternalFrame {
+public class HallBooking_Cancel extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form HallBookingView
+     * Creates new form HallBooking_Cancel
      */
-    public HallBooking_View(HallBooking h) {
-
+    public HallBooking_Cancel() {
         initComponents();
-        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-        jTextField2.setText(h.getCustomer().getName());
-        jTextField5.setText(df.format(h.getDate()));
-        jTextField10.setText(Integer.toString(h.getNoOfPeople()));
-        jTextField8.setText(h.getCustomer().getContactNumber());
-        jTextField4.setText(h.getCustomer().getAddress());
-        jTextField3.setText(h.getPack());
-
     }
 
     /**
@@ -57,10 +46,11 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
         jTextField5 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("View Hall Booking");
+        setTitle("Cancel Hall Booking");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -89,10 +79,10 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
         jTextField1.setEditable(false);
         jTextField1.setColumns(10);
         jTextField1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField1InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,10 +109,10 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
         jTextField8.setEditable(false);
         jTextField8.setColumns(10);
         jTextField8.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField8InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
@@ -139,10 +129,10 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
         jTextField10.setEditable(false);
         jTextField10.setColumns(10);
         jTextField10.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField10InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
@@ -169,10 +159,10 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
         jTextField3.setEditable(false);
         jTextField3.setColumns(10);
         jTextField3.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField3InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -245,9 +235,9 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -281,7 +271,7 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // if(jTextField1.getText().length()>=10) {
 
-        //}
+            //}
         // }
     }//GEN-LAST:event_jTextField1KeyTyped
 
@@ -310,6 +300,7 @@ public class HallBooking_View extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField10KeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

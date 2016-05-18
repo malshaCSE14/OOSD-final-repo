@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import model.Customer;
 import model.HallBooking;
 import model.Hotel;
+import java.sql.Date;
 
 /**
  *
@@ -21,8 +22,9 @@ public class WeddingHallBooking extends javax.swing.JInternalFrame {
     /**
      * Creates new form WeddingHallBooking
      */
-    public WeddingHallBooking() {
+    public WeddingHallBooking(Date date) {
         initComponents();
+        jDateChooser1.setDate(date);
     }
 
     /**
@@ -85,10 +87,10 @@ public class WeddingHallBooking extends javax.swing.JInternalFrame {
 
         jTextField1.setColumns(10);
         jTextField1.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField1InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -112,10 +114,10 @@ public class WeddingHallBooking extends javax.swing.JInternalFrame {
 
         jTextField8.setColumns(10);
         jTextField8.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField8InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
@@ -131,10 +133,10 @@ public class WeddingHallBooking extends javax.swing.JInternalFrame {
 
         jTextField10.setColumns(10);
         jTextField10.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 jTextField10InputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         jTextField10.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +155,11 @@ public class WeddingHallBooking extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("CANCEL");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("CONFIRM");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -302,7 +309,7 @@ public class WeddingHallBooking extends javax.swing.JInternalFrame {
         hBooking.setDate(jDateChooser1.getDate());
         hBooking.setNoOfPeople(Integer.parseInt(jTextField10.getText()));
         hBooking.setPack(jTextField1.getText());
-        Hotel.getInstance().setHallbooking(hBooking);
+        //Hotel.getInstance().setHallbooking(hBooking);
         boolean result = dbOps.addHallBooking(hBooking);
 
         if(result){
@@ -313,6 +320,10 @@ public class WeddingHallBooking extends javax.swing.JInternalFrame {
             clearFields();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
      public void clearFields(){
