@@ -7,11 +7,8 @@ package view;
 
 import database.DBOperations;
 import javax.swing.JOptionPane;
+import java.sql.Date;
 
-/**
- *
- * @author Nethmi
- */
 public class HallAvailability extends javax.swing.JInternalFrame {
     private DBOperations dbOps= DBOperations.getInstance();
 
@@ -103,7 +100,7 @@ public class HallAvailability extends javax.swing.JInternalFrame {
             System.out.println("Entered date :" + new java.sql.Date(jDateChooser1.getDate().getTime()));
             System.out.println(x);
             if (x == 1) {
-                manager_view.getInstance().displayWeddingHallBooking();
+                manager_view.getInstance().displayWeddingHallBooking(new java.sql.Date(jDateChooser1.getDate().getTime()));
                 this.dispose();
             } else if (x == 0) {
                 JOptionPane.showMessageDialog(this, "Date Not Available!");
