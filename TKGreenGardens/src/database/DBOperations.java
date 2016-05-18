@@ -153,8 +153,7 @@ public class DBOperations {  ////////update staff liyanndooooooooooooooooooooooo
             }
         }
     }
-    
-    
+
     public int checkHallAvailability(Date date) {
         try {
             con = (Connection) DriverManager.getConnection(url, username, password);  //get the connection to the database
@@ -189,6 +188,59 @@ public class DBOperations {  ////////update staff liyanndooooooooooooooooooooooo
                 }
             } catch (Exception e) {
                 System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<HallBooking> getAllHallBookings() {
+        try {
+            ArrayList<HallBooking> bookinglist = new ArrayList<HallBooking>();
+            con = (Connection) DriverManager.getConnection(url, username, password);
+            String query = "SELECT * FROM hall_booking ";
+            pst = con.prepareStatement(query);
+
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                HallBooking h = new HallBooking();
+                Customer c = new Customer();
+
+                h.setBookingIndex(rs.getInt(1));
+                h.setCustomer(c);
+                h.getCustomer().setName(rs.getString(2));
+                h.setDate(rs.getDate(3));
+                h.setNoOfPeople(rs.getInt(4));
+                h.getCustomer().setContactNumber(rs.getString(5));
+                h.getCustomer().setAddress(rs.getString(6));
+                h.setPack(rs.getString(7));
+//                StaffMember s = new StaffMember();
+//                s.setEmployeeID(rs.getInt(1));
+//                s.setName(rs.getString(2));
+//                s.setGender(rs.getString(3));
+//                s.setAddress(rs.getString(4));
+//                s.setBirthday(rs.getDate(5));
+//                s.setRecruitmentDate(rs.getDate(6));
+//                s.setDesignation(rs.getString(7));
+//                s.setSalary(rs.getInt(8));
+//                s.setContactNumber(rs.getString(9));
+//                s.setImage(rs.getString(10));
+
+                bookinglist.add(h);
+            }
+            return bookinglist;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
             }
         }
 
@@ -443,7 +495,7 @@ public class DBOperations {  ////////update staff liyanndooooooooooooooooooooooo
             while (rs.next()) {
                 int status = date.toString().compareTo(rs.getDate(1).toString());
                 if (status == 0) {
-                   // System.out.println("");
+                    // System.out.println("");
 
                     Room r = new Room(rs.getInt(2));
                     list.add(r);
