@@ -20,7 +20,7 @@ public class RoomBooking extends Booking{
     private int noOfAdults;
     private int noOfChildren;
     
-    
+    private int totalRoomPrices;
     private ArrayList<Date> dateList = new ArrayList<>();
     
     
@@ -121,6 +121,20 @@ public class RoomBooking extends Booking{
      */
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
+    }
+
+    /**
+     * @return the totalRoomPrices
+     */
+    public int getTotalRoomPrices() {
+        return totalRoomPrices;
+    }
+
+    /**
+     * @param totalRoomPrices the totalRoomPrices to set
+     */
+    public void setTotalRoomPrices(int totalRoomPrices) {
+        this.totalRoomPrices = totalRoomPrices;
     }
 
 

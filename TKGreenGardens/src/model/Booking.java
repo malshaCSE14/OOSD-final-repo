@@ -12,9 +12,8 @@ public class Booking {
 
     private int bookingIndex;
     private Customer customer;
-    
-    List<Payment> payment = new ArrayList<Payment>();
-
+    private List<Payment> payment = new ArrayList<Payment>();
+    private int advancePayment = 0;
     public Booking() {
     }
 
@@ -45,6 +44,34 @@ public class Booking {
      */
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    /**
+     * @return the payment
+     */
+    public List<Payment> getPayment() {
+        return payment;
+    }
+
+    /**
+     * @param payment the payment to set
+     */
+    public void setPayment(List<Payment> payment) {
+        this.payment = payment;
+    }
+
+    /**
+     * @return the advancePayment
+     */
+    public int getAdvancePayment() {
+        return advancePayment;
+    }
+
+    /**
+     * @param advancePayment the advancePayment to set
+     */
+    public void setAdvancePayment(int advancePayment) {
+        this.advancePayment = advancePayment;
     }
     
 }
