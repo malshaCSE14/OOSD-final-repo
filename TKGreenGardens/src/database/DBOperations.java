@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import controller.Details;
@@ -16,11 +11,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-/**
- *
- * @author Nethmi
- */
-public class DBOperations {  ////////update staff liyanndooooooooooooooooooooooooooooooooooo
+public class DBOperations {  
 
     private DateFormat dinyr = new SimpleDateFormat("D");
     private static final DBOperations db = new DBOperations();
@@ -246,6 +237,35 @@ public class DBOperations {  ////////update staff liyanndooooooooooooooooooooooo
 
     }
 
+    //camcel hall booking
+    public boolean cancelHallBooking(HallBooking h){
+    
+        try {
+           
+            con = (Connection) DriverManager.getConnection(url, username, password);
+            String query = "DELETE FROM hall_booking WHERE Booking_ID=" + h.getBookingIndex();
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.executeUpdate();
+            
+            return true;
+        } catch (Exception e) {
+            
+            return false;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+    
     //add staff members into staff_members table in DB
     public boolean addStaff(StaffMember s) {
         try {

@@ -5,7 +5,14 @@
  */
 package view;
 
+import database.DBOperations;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import model.HallBooking;
 
 /**
  *
@@ -13,11 +20,19 @@ import javax.swing.JOptionPane;
  */
 public class HallBooking_Cancel extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form HallBooking_Cancel
-     */
-    public HallBooking_Cancel() {
+    DBOperations dbOps = DBOperations.getInstance();
+
+    public HallBooking_Cancel(HallBooking h) {
         initComponents();
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        jTextField6.setText(Integer.toString(h.getBookingIndex()));
+        jTextField2.setText(h.getCustomer().getName());
+        jTextField5.setText(df.format(h.getDate()));
+        jTextField10.setText(Integer.toString(h.getNoOfPeople()));
+        jTextField8.setText(h.getCustomer().getContactNumber());
+        jTextField4.setText(h.getCustomer().getAddress());
+        jTextField3.setText(h.getPack());
+
     }
 
     /**
@@ -45,6 +60,8 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jTextField5 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -146,7 +163,7 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("OK");
+        jButton1.setText("CANCEL");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -176,6 +193,18 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Booking ID :");
+
+        jTextField6.setEditable(false);
+        jTextField6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -185,7 +214,8 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +230,8 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField5)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
+                        .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
@@ -208,6 +239,10 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -271,7 +306,7 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
     private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
         // if(jTextField1.getText().length()>=10) {
 
-            //}
+        //}
         // }
     }//GEN-LAST:event_jTextField1KeyTyped
 
@@ -300,8 +335,34 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField10KeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        this.dispose();
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Do you want to continue?", "Confirm",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (response == JOptionPane.NO_OPTION) {
+            System.out.println("No button clicked");
+        } else if (response == JOptionPane.YES_OPTION) {
+
+            ArrayList<HallBooking> hallArray = dbOps.getAllHallBookings();
+            Iterator iterator = hallArray.iterator();
+            int booking_ID = Integer.parseInt(jTextField6.getText());
+
+            while (iterator.hasNext()) {
+                HallBooking h = (HallBooking) iterator.next();
+                if (h.getBookingIndex() == booking_ID) {
+                    boolean result = dbOps.cancelHallBooking(h);
+                    if (result) {
+                        JOptionPane.showMessageDialog(this, "Successfully Deleted!");
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Error Occured!");
+                    }
+                    break;
+                }
+            }
+        } else if (response == JOptionPane.CLOSED_OPTION) {
+            System.out.println("JOptionPane closed");
+        }
+        //this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextField3InputMethodTextChanged
@@ -316,6 +377,10 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3KeyTyped
 
+    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -325,6 +390,7 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JTextField jTextField1;
@@ -333,6 +399,7 @@ public class HallBooking_Cancel extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
     // End of variables declaration//GEN-END:variables
 }

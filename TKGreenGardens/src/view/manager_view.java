@@ -36,8 +36,6 @@ import model.StaffMember;
  */
 public class manager_view extends javax.swing.JFrame {
 
-    
-
     /**
      * Creates new form manger_view
      */
@@ -45,7 +43,7 @@ public class manager_view extends javax.swing.JFrame {
     private StaffMemberView frame = new StaffMemberView();
     private SalaryDetails details = new SalaryDetails();
     private String image;
-    private static final manager_view mv= new manager_view();
+    private static final manager_view mv = new manager_view();
     private ImageIcon imageIcon = new ImageIcon("img\\silhouette-168.png");
     private ArrayList<StaffMember> listStaff;
     private ArrayList<HallBooking> listHallBooking;
@@ -67,7 +65,7 @@ public class manager_view extends javax.swing.JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
-    
+
     /**
      * @return the mv
      */
@@ -1170,7 +1168,7 @@ public class manager_view extends javax.swing.JFrame {
 
         //JLabel label = new JLabel(imageIcon);
         if (fileName == null) {
-            
+
             jLabel7.setIcon(imageIcon);
             jLabel7.setVisible(true);
         } else {
@@ -1256,17 +1254,16 @@ public class manager_view extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTabbedPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane2MouseClicked
-        
-        
+
         /*
-        JTextField[] list={jTextField1,jTextField2,jTextField3,jTextField4,jTextField5};
-        for(JTextField f : list){
-            f.setText(null);
-        }
+         JTextField[] list={jTextField1,jTextField2,jTextField3,jTextField4,jTextField5};
+         for(JTextField f : list){
+         f.setText(null);
+         }
         
-        jDateChooser1.setDate(null);
-        jDateChooser2.setDate(null);
-        jLabel7.setIcon(imageIcon);*/
+         jDateChooser1.setDate(null);
+         jDateChooser2.setDate(null);
+         jLabel7.setIcon(imageIcon);*/
     }//GEN-LAST:event_jTabbedPane2MouseClicked
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
@@ -1275,7 +1272,7 @@ public class manager_view extends javax.swing.JFrame {
         int id = Integer.parseInt(dtm.getValueAt(index, 0).toString());
 
         StaffMember s = db.getMember(id);
-        
+
         details.jTextField1.setText(Integer.toString(s.getEmployeeID()));
         details.jTextField2.setText(s.getName());
         details.jTextField3.setText(s.getDesignation());
@@ -1303,11 +1300,11 @@ public class manager_view extends javax.swing.JFrame {
         DailyReport d = new DailyReport();
         d.setVisible(true);
         d.setLocationRelativeTo(null);
-        
+
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1324,40 +1321,42 @@ public class manager_view extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         TableModel model = jTable6.getModel();
 
-        int booking_ID = (Integer)model.getValueAt(jTable6.getSelectedRow(), 0) ;
+        int booking_ID = (Integer) model.getValueAt(jTable6.getSelectedRow(), 0);
         ArrayList<HallBooking> hallArray = db.getAllHallBookings();
-        
+
         Iterator iterator = hallArray.iterator();
         while (iterator.hasNext()) {
-            HallBooking h = (HallBooking)iterator.next();
-            if (h.getBookingIndex()== booking_ID){
-            HallBooking_View hbv= new HallBooking_View(h );
-             jDesktopPane5.add(hbv);
-             hbv.setLocation(300, 5);
-             hbv.show();        // TODO add your handling code here:
-            break;
+            HallBooking h = (HallBooking) iterator.next();
+            if (h.getBookingIndex() == booking_ID) {
+                HallBooking_View hbv = new HallBooking_View(h);
+                jDesktopPane5.add(hbv);
+                hbv.setLocation(300, 5);
+                hbv.show();        // TODO add your handling code here:
+                break;
             }
         }
-               // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         TableModel model = jTable6.getModel();
 
-        int booking_ID = (Integer)model.getValueAt(jTable6.getSelectedRow(), 0) ;
+        int booking_ID = (Integer) model.getValueAt(jTable6.getSelectedRow(), 0);
         ArrayList<HallBooking> hallArray = db.getAllHallBookings();
-        
+
         Iterator iterator = hallArray.iterator();
         while (iterator.hasNext()) {
-            HallBooking h = (HallBooking)iterator.next();
-            if (h.getBookingIndex()== booking_ID){
-            HallBooking_View hbv= new HallBooking_View(h );
-             jDesktopPane5.add(hbv);
-             hbv.setLocation(300, 5);
-             hbv.show();        // TODO add your handling code here:
-            break;
+            HallBooking h = (HallBooking) iterator.next();
+            if (h.getBookingIndex() == booking_ID) {
+                HallBooking_Cancel hbc = new HallBooking_Cancel(h);
+                jDesktopPane5.add(hbc);
+                hbc.setLocation(300, 5);
+                hbc.show();        // TODO add your handling code here:
+                break;
             }
-        }        
+        }
+
+
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jTable6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MouseClicked
@@ -1411,22 +1410,22 @@ public class manager_view extends javax.swing.JFrame {
         });
     }
 
-    private void loadHallBookings(){
+    private void loadHallBookings() {
         listHallBooking = db.getAllHallBookings();
         HallBookingDetails s = new HallBookingDetails(listHallBooking);
-        jTable6.setModel(s); 
+        jTable6.setModel(s);
     }
-    
+
     private void loadMemberDetails() {
-        
+
         listStaff = db.getAllMembers();
         StaffMemberDetail s = new StaffMemberDetail(listStaff);
         jTable1.setModel(s);
         jTable2.setModel(s);
         jTable3.setModel(s);
-        
+
     }
-    
+
     void displayWeddingHallBooking(Date date) {
         WeddingHallBooking hall = new WeddingHallBooking(date);
         jDesktopPane5.add(hall);
@@ -1457,7 +1456,7 @@ public class manager_view extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JDesktopPane jDesktopPane3;
     public javax.swing.JDesktopPane jDesktopPane4;
-    private javax.swing.JDesktopPane jDesktopPane5;
+    public javax.swing.JDesktopPane jDesktopPane5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
