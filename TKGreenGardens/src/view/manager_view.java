@@ -1333,6 +1333,13 @@ public class manager_view extends javax.swing.JFrame {
                 hbv.setLocation(300, 5);
                 hbv.show();        // TODO add your handling code here:
                 break;
+            HallBooking h = (HallBooking)iterator.next();
+            if (h.getBookingIndex()== booking_ID){
+            HallBooking_View hbv= new HallBooking_View(h);
+             jDesktopPane5.add(hbv);
+             hbv.setLocation(300, 5);
+             hbv.show();        // TODO add your handling code here:
+            break;
             }
         }
         // TODO add your handling code here:

@@ -5,18 +5,33 @@
  */
 package view;
 
+import java.util.Date;
+import model.SubBooking;
 /**
  *
  * @author Nethmi
  */
 public class ViewDetails extends javax.swing.JInternalFrame {
-
+    
+    private int roomNo;
+    private Date date;
     /**
      * Creates new form ViewDetails
      */
     public ViewDetails() {
-        initComponents();
-    }
+        initComponents(); 
+        jTextField1.setText("BookingID");
+        jTextField2.setText("CustomerID");
+        jTextField3.setText("Customer Name");
+        jTextField4.setText("Customer NIC");
+        jTextField5.setText("Contact Number");
+        jTextField6.setText("Address");
+        jTextField7.setText("Region");
+        jTextField8.setText("CheckIn");
+        jTextField9.setText("CheckOut");
+        jTextField10.setText("Adults");
+        jTextField11.setText("Children");
+   }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -266,4 +281,9 @@ public class ViewDetails extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+
+    void setBookingToView(SubBooking b) {
+        roomNo = b.getRoomNumber();
+        date = b.getDate();
+    }
 }
