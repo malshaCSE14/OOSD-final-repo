@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.HallBookingDetails;
 import controller.SalaryDetailsCon;
 import controller.StaffMemberDetail;
 import database.DBOperations;
@@ -14,7 +15,7 @@ import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -46,7 +47,8 @@ public class manager_view extends javax.swing.JFrame {
     private String image;
     private static final manager_view mv= new manager_view();
     private ImageIcon imageIcon = new ImageIcon("img\\silhouette-168.png");
-    private ArrayList<StaffMember> list;
+    private ArrayList<StaffMember> listStaff;
+    private ArrayList<HallBooking> listHallBooking;
 
     private manager_view() {
         try {
@@ -1320,19 +1322,9 @@ public class manager_view extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        TableModel model = jTable3.getModel();
+        TableModel model = jTable6.getModel();
 
-        int booking_ID = (Integer)model.getValueAt(jTable3.getSelectedRow(), 0) ;
-//        
-//        String name = (String) model.getValueAt(jTable3.getSelectedRow(), 1);
-//        Date date1 = (Date) model.getValueAt(jTable3.getSelectedRow(), 2);
-//        DateFormat df1 = new SimpleDateFormat("dd/MM/yyyy");
-//        String date = df1.format(date1);
-//        String noOfPeople = Integer.toString((Integer)model.getValueAt(jTable3.getSelectedRow(), 3)) ;
-//        String contactNumber = (String) model.getValueAt(jTable3.getSelectedRow(), 4);
-//        String address = (String) model.getValueAt(jTable3.getSelectedRow(), 5);
-//        String pack = (String) model.getValueAt(jTable3.getSelectedRow(), 6);
-
+        int booking_ID = (Integer)model.getValueAt(jTable6.getSelectedRow(), 0) ;
         ArrayList<HallBooking> hallArray = db.getAllHallBookings();
         
         Iterator iterator = hallArray.iterator();
@@ -1350,7 +1342,22 @@ public class manager_view extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
+        TableModel model = jTable6.getModel();
+
+        int booking_ID = (Integer)model.getValueAt(jTable6.getSelectedRow(), 0) ;
+        ArrayList<HallBooking> hallArray = db.getAllHallBookings();
+        
+        Iterator iterator = hallArray.iterator();
+        while (iterator.hasNext()) {
+            HallBooking h = (HallBooking)iterator.next();
+            if (h.getBookingIndex()== booking_ID){
+            HallBooking_View hbv= new HallBooking_View(h );
+             jDesktopPane5.add(hbv);
+             hbv.setLocation(300, 5);
+             hbv.show();        // TODO add your handling code here:
+            break;
+            }
+        }        
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jTable6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6MouseClicked
@@ -1404,18 +1411,24 @@ public class manager_view extends javax.swing.JFrame {
         });
     }
 
+    private void loadHallBookings(){
+        listHallBooking = db.getAllHallBookings();
+        HallBookingDetails s = new HallBookingDetails(listHallBooking);
+        jTable6.setModel(s); 
+    }
+    
     private void loadMemberDetails() {
         
-        list = db.getAllMembers();
-        StaffMemberDetail s = new StaffMemberDetail(list);
+        listStaff = db.getAllMembers();
+        StaffMemberDetail s = new StaffMemberDetail(listStaff);
         jTable1.setModel(s);
         jTable2.setModel(s);
         jTable3.setModel(s);
         
     }
     
-    void displayWeddingHallBooking() {
-        WeddingHallBooking hall = new WeddingHallBooking();
+    void displayWeddingHallBooking(Date date) {
+        WeddingHallBooking hall = new WeddingHallBooking(date);
         jDesktopPane5.add(hall);
         hall.setLocation(430, 0);
         hall.show();
